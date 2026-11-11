@@ -17,6 +17,8 @@ function ClassCard({ s, index, onChange }) {
   const start = new Date(s.start_time);
   const full = s.seats_left <= 0 && !s.booked;
   const almostFull = !full && s.seats_left > 0 && s.seats_left < 3;
+  // A class that is already running can be joined (if booked) but no longer booked or cancelled.
+  const started = start.getTime() <= Date.now();
   const fill = ((s.capacity - s.seats_left) / s.capacity) * 100;
 
   const book = () => requireLogin(async () => {
@@ -71,7 +73,8 @@ function ClassCard({ s, index, onChange }) {
           <span className="flex items-center gap-1 rounded-full bg-blue-500/10 px-2 py-0.5 font-semibold text-blue-400"><Languages size={12} /> {s.language}</span>
           <span className="rounded-full bg-violet-500/10 px-2 py-0.5 font-semibold text-violet-400">{s.level}</span>
           <span className="rounded-full bg-line/10 px-2 py-0.5 font-semibold text-muted">{s.topic}</span>
-          {almostFull && <span className="flex items-center gap-1 rounded-full bg-amber-500/15 px-2 py-0.5 font-bold text-amber-400"><Flame size={12} /> {t('live.almostFull')}</span>}
+          {started && <span className="flex items-center gap-1 rounded-full bg-rose-500 px-2 py-0.5 font-bold text-white"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" /> {t('live.liveNow')}</span>}
+          {almostFull && !started && <span className="flex items-center gap-1 rounded-full bg-amber-500/15 px-2 py-0.5 font-bold text-amber-400"><Flame size={12} /> {t('live.almostFull')}</span>}
           {s.booked && <span className="flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 font-bold text-emerald-400"><Check size={12} /> {t('live.booked')}</span>}
         </div>
         <h3 className="mt-2 text-lg font-semibold">{s.title}</h3>
@@ -90,8 +93,10 @@ function ClassCard({ s, index, onChange }) {
           <>
             {/* Placeholder meeting link — replace with the real video-call URL before launch. */}
             <a href={`https://meet.novaris.example/class-${s.id}`} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1"><Video size={16} /> {t('dashboard.join')}</a>
-            <button onClick={cancel} disabled={busy} className="btn-ghost flex-1 text-rose-400">{busy ? <Loader2 size={16} className="animate-spin" /> : <X size={16} />} {t('live.cancel')}</button>
+            {!started && <button onClick={cancel} disabled={busy} className="btn-ghost flex-1 text-rose-400">{busy ? <Loader2 size={16} className="animate-spin" /> : <X size={16} />} {t('live.cancel')}</button>}
           </>
+        ) : started ? (
+          <button disabled className="btn-ghost flex-1">{t('live.started')}</button>
         ) : full ? (
           <button onClick={() => toast(t('live.waitlistToast'), 'info')} className="btn-ghost flex-1">{t('live.waitlist')}</button>
         ) : (

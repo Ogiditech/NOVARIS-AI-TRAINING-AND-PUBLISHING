@@ -58,7 +58,8 @@ function NextClass({ cls }) {
       </div>
       <div className="relative mt-4 flex flex-wrap items-center gap-3">
         <div className="flex gap-2" role="timer" aria-label={t('dashboard.countdownLabel')}>
-          {parts.map(([k, v]) => (
+          {c.live && <span className="flex items-center gap-2 rounded-xl bg-rose-500 px-4 py-3 font-display font-bold text-white"><span className="h-2 w-2 animate-pulse rounded-full bg-white" /> {t('live.liveNow')}</span>}
+          {!c.live && parts.map(([k, v]) => (
             <div key={k} className="w-14 rounded-xl border border-line/15 bg-surface/60 py-1.5 text-center">
               <p className="font-display text-xl font-bold tabular-nums">{String(v).padStart(2, '0')}</p>
               <p className="text-[10px] uppercase text-muted">{t(`dashboard.units.${k}`)}</p>

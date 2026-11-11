@@ -40,6 +40,8 @@ async function cancel(req) {
   const user = await requireUser(req);
   const { id } = parse(idSchema, { id: req.query.id });
   const sql = db();
+  const [cls] = await sql`SELECT start_time FROM live_classes WHERE id = ${id}`;
+  if (cls && new Date(cls.start_time) <= new Date()) throw new HttpError(409, 'This class has already started, so the booking can no longer be cancelled.');
   const removed = await sql`DELETE FROM class_bookings WHERE class_id = ${id} AND user_id = ${user.id} RETURNING id`;
   if (!removed.length) throw new HttpError(404, 'You do not have a booking for that class.');
   const [row] = await sql`SELECT c.capacity - (SELECT count(*)::int FROM class_bookings b WHERE b.class_id = c.id) AS seats_left FROM live_classes c WHERE c.id = ${id}`;

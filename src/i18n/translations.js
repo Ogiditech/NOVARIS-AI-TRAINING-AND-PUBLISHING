@@ -473,7 +473,7 @@ const enAccounts = {
     another: 'Submit another manuscript',
   },
   live: {
-    almostFull: 'Almost full',
+    almostFull: 'Almost full', liveNow: 'Live now', started: 'Already started',
     cancel: 'Cancel booking',
     cancelledToast: 'Booking cancelled for “{topic}”. Your seat is free for someone else.',
     loginToBook: 'Log in to book a seat — we will bring you right back.',

@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "db:setup": "node --env-file=.env db/setup.mjs",
     "db:reset": "node --env-file=.env db/reset.mjs",
-    "db:build-seed": "node db/build-seed.mjs"
+    "db:build-seed": "node db/build-seed.mjs",
+    "db:refresh-classes": "node --env-file=.env db/refresh-classes.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
