@@ -19,5 +19,7 @@ export default function useRequireLogin() {
 
 // Only allow redirects to paths inside this site.
 export function safeNext(next, fallback = '/dashboard') {
-  return typeof next === 'string' && next.startsWith('/') && !next.startsWith('//') ? next : fallback;
+  // Only same-site paths. Browsers treat "/\evil.com" like "//evil.com", so backslashes and
+  // control characters are rejected too — otherwise ?next= could bounce people to another site.
+  return typeof next === 'string' && /^\/(?![\/\\])/.test(next) && !/[\\\u0000-\u001f]/.test(next) ? next : fallback;
 }

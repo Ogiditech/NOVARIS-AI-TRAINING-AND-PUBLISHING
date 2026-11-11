@@ -69,7 +69,7 @@ function Quiz({ lesson, canSave, onScored }) {
               {r && (
                 <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className={`mt-2 flex items-start gap-2 rounded-xl px-3 py-2 text-sm ${r.correct ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
                   {r.correct ? <CheckCircle2 size={17} className="mt-0.5 shrink-0" /> : <XCircle size={17} className="mt-0.5 shrink-0" />}
-                  <span><b>{r.correct ? t('player.correctShort') : t('player.wrongShort')}</b> <span className="text-ink/80">{r.explanation}</span></span>
+                  <span><b>{r.correct ? t('player.correctShort') : t('player.wrongShort')}</b> <span className="text-ink/80">{r.correct ? r.explanation : t('player.wrongHint')}</span></span>
                 </motion.p>
               )}
             </AnimatePresence>

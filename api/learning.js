@@ -114,7 +114,12 @@ async function quiz(req) {
 
   const questions = await sql`SELECT id, correct_index, explanation FROM quiz_questions WHERE lesson_id = ${lessonId} ORDER BY id`;
   if (answers.length !== questions.length) throw new HttpError(400, 'Please answer every question.');
-  const results = questions.map((q, i) => ({ questionId: Number(q.id), chosen: answers[i], correct: answers[i] === q.correct_index, correctIndex: q.correct_index, explanation: q.explanation }));
+  // The right answer (and its explanation, which gives it away) is only returned for questions the
+  // learner already got right — otherwise one throwaway attempt would reveal the whole answer key.
+  const results = questions.map((q, i) => {
+    const correct = answers[i] === q.correct_index;
+    return { questionId: Number(q.id), chosen: answers[i], correct, ...(correct && { correctIndex: q.correct_index, explanation: q.explanation }) };
+  });
   const score = Math.round((results.filter((r) => r.correct).length / results.length) * 100);
 
   let saved = false;

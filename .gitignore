@@ -12,3 +12,6 @@ env*.txt
 # OS / editor
 .DS_Store
 Thumbs.db
+
+# Test output
+tests/output/

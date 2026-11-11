@@ -395,6 +395,7 @@ const enAccounts = {
     finishHint: 'Read the notes, take the quiz and mark the lesson complete.',
     correctShort: 'Correct.',
     wrongShort: 'Not quite.',
+    wrongHint: 'Check this part of the lesson again.',
     score: 'Score: {n}%',
     passed: 'Quiz passed — great job!',
     tryAgainHint: 'Have another look at the notes and try again.',

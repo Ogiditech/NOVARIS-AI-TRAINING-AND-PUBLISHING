@@ -12,7 +12,11 @@
     "db:setup": "node --env-file=.env db/setup.mjs",
     "db:reset": "node --env-file=.env db/reset.mjs",
     "db:build-seed": "node db/build-seed.mjs",
-    "db:refresh-classes": "node --env-file=.env db/refresh-classes.mjs"
+    "db:refresh-classes": "node --env-file=.env db/refresh-classes.mjs",
+    "check:security": "node scripts/check-security.mjs",
+    "test:api": "node --env-file=.env tests/api.test.mjs",
+    "test:e2e": "node --env-file=.env tests/e2e.test.mjs",
+    "verify": "npm run build && npm run check:security && npm audit --audit-level=high"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
@@ -23,7 +27,7 @@
     "lucide-react": "^0.468.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0",
+    "react-router-dom": "^7.18.5",
     "recharts": "^2.15.0",
     "zod": "^4.6.7"
   },
@@ -31,10 +35,11 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.1.2",
+    "express": "^4.21.2",
     "postcss": "^8.4.49",
+    "puppeteer-core": "^25.17.0",
     "tailwindcss": "^3.4.17",
-    "vite": "^5.4.11",
-    "express": "^4.21.2"
+    "vite": "^6.4.6"
   },
   "engines": {
     "node": ">=22"
