@@ -1,4 +1,5 @@
-# Weekly pull requests for security and version updates.
+# Weekly pull requests for minor/patch updates. Major versions (e.g. React 19) can break the app,
+# so they are skipped here and done deliberately. Security fixes still arrive via Dependabot alerts.
 version: 2
 updates:
   - package-ecosystem: npm
@@ -9,6 +10,9 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
