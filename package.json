@@ -34,7 +34,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
-    "concurrently": "^9.1.2",
+    "concurrently": "^10.0.7",
     "express": "^4.21.2",
     "postcss": "^8.4.49",
     "puppeteer-core": "^25.17.0",
