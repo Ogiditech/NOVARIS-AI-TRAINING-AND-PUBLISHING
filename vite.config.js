@@ -16,7 +16,7 @@ export default defineConfig({
         manualChunks(id) {
           if (!id.includes('node_modules')) return;
           const groups = {
-            react: ['react', 'react-dom', 'react-router-dom'],
+            react: ['react', 'react-dom', 'react-router', 'react-router-dom', 'scheduler'],
             motion: ['framer-motion'],
             charts: ['recharts'],
           };
