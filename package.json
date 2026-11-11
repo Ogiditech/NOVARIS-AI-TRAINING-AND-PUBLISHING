@@ -24,7 +24,7 @@
     "canvas-confetti": "^1.9.3",
     "framer-motion": "^11.15.0",
     "jose": "^6.2.17",
-    "lucide-react": "^0.468.0",
+    "lucide-react": "^0.577.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.18.5",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
-    "concurrently": "^9.1.2",
+    "concurrently": "^9.2.5",
     "express": "^4.21.2",
     "postcss": "^8.4.49",
     "puppeteer-core": "^25.17.0",
