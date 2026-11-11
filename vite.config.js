@@ -12,10 +12,17 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
-          charts: ['recharts'],
+        // Vite 8 (Rolldown) only accepts manualChunks as a function.
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return;
+          const groups = {
+            react: ['react', 'react-dom', 'react-router-dom'],
+            motion: ['framer-motion'],
+            charts: ['recharts'],
+          };
+          for (const [name, pkgs] of Object.entries(groups)) {
+            if (pkgs.some((p) => id.includes('/node_modules/' + p + '/'))) return name;
+          }
         },
       },
     },
