@@ -1,0 +1,41 @@
+{
+  "name": "novaris-ai-training-and-publishing",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c magenta,cyan \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:web": "vite --strictPort",
+    "dev:api": "node --env-file=.env server/dev-api.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "db:setup": "node --env-file=.env db/setup.mjs",
+    "db:reset": "node --env-file=.env db/reset.mjs",
+    "db:build-seed": "node db/build-seed.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
+    "bcryptjs": "^3.0.3",
+    "canvas-confetti": "^1.9.3",
+    "framer-motion": "^11.15.0",
+    "jose": "^6.2.17",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "recharts": "^2.15.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.11",
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

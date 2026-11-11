@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/api/auth/:action", "destination": "/api/auth?action=:action" },
+    { "source": "/api/courses/:slug/enroll", "destination": "/api/courses?slug=:slug&action=enroll" },
+    { "source": "/api/courses/:slug", "destination": "/api/courses?slug=:slug" },
+    { "source": "/api/lessons", "destination": "/api/learning?op=lessons" },
+    { "source": "/api/progress", "destination": "/api/learning?op=progress" },
+    { "source": "/api/quiz", "destination": "/api/learning?op=quiz" },
+    { "source": "/api/certificates/:code", "destination": "/api/certificates?code=:code" },
+    { "source": "/api/ebooks/:slug", "destination": "/api/ebooks?slug=:slug" },
+    { "source": "/api/purchases", "destination": "/api/ebooks?op=purchase" },
+    { "source": "/api/bookings", "destination": "/api/classes?op=book" },
+    { "source": "/api/contact", "destination": "/api/forms?op=contact" },
+    { "source": "/api/submissions", "destination": "/api/forms?op=submission" },
+    { "source": "/api/library", "destination": "/api/profile?op=library" },
+    { "source": "/api/products/purchase", "destination": "/api/products?op=purchase" },
+    { "source": "/api/products/library", "destination": "/api/products?op=library" },
+    { "source": "/api/products/:slug", "destination": "/api/products?slug=:slug" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}
