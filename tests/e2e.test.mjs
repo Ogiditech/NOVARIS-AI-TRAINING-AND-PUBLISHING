@@ -115,7 +115,10 @@ try {
     await chip('Category', 'All'); await chip('Level', 'All'); await chip('Language', 'Swahili'); const sw = await count();
     await chip('Language', 'All');
     check('Courses', 'filters by category, level, language', agents === 3 && agentsAdv === 1 && sw === 1, `agents ${agents}, +advanced ${agentsAdv}, swahili ${sw}`);
-    await page.type('main input[type=search]', 'prompt'); const q = await count();
+    await page.type('main input[type=search]', 'prompt');
+    // Wait for the debounced search to come back from the database instead of a fixed delay.
+    await page.waitForFunction(() => document.querySelectorAll('main [data-course]').length === 3, { timeout: 8000 }).catch(() => {});
+    const q = await count();
     check('Courses', 'search by title', q === 3, `${q} for "prompt"`);
     await typeInto(page, 'main input[type=search]', ''); await page.keyboard.press('Backspace');
     await page.select('main select', 'priceDesc'); await wait(1600);
@@ -254,7 +257,7 @@ try {
     await wait(1200);
     // almost-full badge somewhere in the schedule (2 seats left in the seed)
     let af = almostFull;
-    for (let d = 0; d < 14 && !af; d++) { await page.evaluate((d) => document.querySelectorAll('main .no-scrollbar button')[d].click(), d); await wait(350); af = await page.evaluate(() => document.body.innerText.includes('Almost full')); }
+    for (let d = 0; d < 14 && !af; d++) { await page.evaluate((d) => document.querySelectorAll('main .no-scrollbar button')[d].click(), d); await wait(800); af = await page.evaluate(() => document.body.innerText.includes('Almost full')); }
     check('Live', '"Almost full" badge under 3 seats', af);
 
     // ---------------- publish + contact
