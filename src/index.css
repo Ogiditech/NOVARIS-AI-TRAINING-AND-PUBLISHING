@@ -133,3 +133,36 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- Novaris Originals reader (rendered Markdown) ---------- */
+.book-prose { max-width: 70ch; line-height: 1.75; color: rgb(var(--ink) / .9); overflow-wrap: break-word; }
+.book-prose > * + * { margin-top: 1.1em; }
+.book-prose h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.9em; line-height: 1.2; font-weight: 700; color: rgb(var(--ink)); margin-top: .2em; }
+.book-prose h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4em; line-height: 1.3; font-weight: 700; color: rgb(var(--ink)); margin-top: 2em; }
+.book-prose h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.18em; line-height: 1.35; font-weight: 600; color: rgb(var(--ink)); margin-top: 1.8em; }
+.book-prose h4 { font-weight: 600; color: rgb(var(--ink)); margin-top: 1.5em; }
+.book-prose h2 + *, .book-prose h3 + *, .book-prose h4 + * { margin-top: .6em; }
+.book-prose strong { font-weight: 650; color: rgb(var(--ink)); }
+.book-prose a:not([data-notify]) { color: #8b5cf6; text-decoration: underline; text-underline-offset: 3px; }
+:root:not(.dark) .book-prose a:not([data-notify]) { color: #6d28d9; }
+.book-prose ul { list-style: disc; padding-left: 1.4em; }
+.book-prose ol { list-style: decimal; padding-left: 1.5em; }
+.book-prose li + li { margin-top: .4em; }
+.book-prose li > ul, .book-prose li > ol { margin-top: .4em; }
+.book-prose li::marker { color: #8b5cf6; }
+.book-prose ul.contains-task-list { list-style: none; padding-left: .1em; }
+.book-prose .task-list-item input[type='checkbox'] { width: 1.05em; height: 1.05em; margin: 0 .6em 0 0; vertical-align: -.15em; accent-color: #7c3aed; }
+.book-prose blockquote { border-left: 3px solid #8b5cf6; padding: .3em 0 .3em 1em; font-style: italic; color: rgb(var(--muted)); }
+.book-prose hr { border: 0; border-top: 1px solid rgb(var(--line) / .2); margin: 2.2em 0; }
+.book-prose :not(pre) > code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .86em; background: rgb(var(--line) / .14); padding: .12em .4em; border-radius: .35em; }
+.book-prose pre { background: rgb(var(--surface)); border: 1px solid rgb(var(--line) / .2); border-radius: .9em; padding: 1em 1.2em; overflow-x: auto; font-size: .82em; line-height: 1.6; }
+.book-prose pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; }
+.book-prose .book-table { overflow-x: auto; border: 1px solid rgb(var(--line) / .2); border-radius: .9em; }
+.book-prose table { width: 100%; border-collapse: collapse; font-size: .88em; line-height: 1.5; }
+.book-prose th, .book-prose td { padding: .65em .9em; text-align: left; vertical-align: top; border-bottom: 1px solid rgb(var(--line) / .15); }
+.book-prose th { background: rgb(var(--line) / .1); font-weight: 600; color: rgb(var(--ink)); white-space: nowrap; }
+.book-prose tr:last-child td { border-bottom: 0; }
+.book-prose img { max-width: 100%; border-radius: .9em; }
+.book-prose .book-teaser { font-size: 1.08em; font-style: italic; color: rgb(var(--muted)); }
+.book-prose .not-prose > * + * { margin-top: 0; }
+.book-prose .not-prose h2 { margin-top: 1rem; }

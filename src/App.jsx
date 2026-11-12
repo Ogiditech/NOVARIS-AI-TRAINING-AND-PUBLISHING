@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useParams } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
@@ -13,6 +13,7 @@ import { DatabaseDown, PageSkeleton, RequireAuth } from './components/states';
 import { useAuth } from './context/AuthContext';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
+import { findOriginal } from './data/originals';
 
 // Heavier screens are loaded on demand to keep the first load fast.
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -23,6 +24,8 @@ const Certificate = lazy(() => import('./pages/Certificate'));
 const Verify = lazy(() => import('./pages/Verify'));
 const Store = lazy(() => import('./pages/Store'));
 const EbookReader = lazy(() => import('./pages/EbookReader'));
+const BookDetails = lazy(() => import('./pages/BookDetails'));
+const BookReader = lazy(() => import('./pages/BookReader'));
 const ProductDetails = lazy(() => import('./pages/ProductDetails'));
 const Library = lazy(() => import('./pages/Library'));
 const LiveClasses = lazy(() => import('./pages/LiveClasses'));
@@ -36,6 +39,12 @@ const Signup = lazy(() => import('./pages/Signup'));
 
 const page = (el) => <Page><Suspense fallback={<PageSkeleton />}>{el}</Suspense></Page>;
 const privatePage = (el) => page(<RequireAuth>{el}</RequireAuth>);
+
+// Novaris Originals (built from content/ebooks) use the chapter reader; catalogue eBooks keep their sample reader.
+function ReaderRoute() {
+  const { slug } = useParams();
+  return findOriginal(slug) ? <BookReader /> : <EbookReader />;
+}
 
 export default function App() {
   const location = useLocation();
@@ -78,7 +87,8 @@ export default function App() {
                   <Route path="/ebooks" element={null} />
                   <Route path="/products" element={null} />
                 </Route>
-                <Route path="/ebooks/:slug/read" element={page(<EbookReader />)} />
+                <Route path="/ebooks/:slug" element={page(<BookDetails />)} />
+                <Route path="/ebooks/:slug/read" element={page(<ReaderRoute />)} />
                 <Route path="/products/:slug" element={page(<ProductDetails />)} />
                 <Route path="/library" element={privatePage(<Library />)} />
                 <Route path="/live" element={page(<LiveClasses />)} />

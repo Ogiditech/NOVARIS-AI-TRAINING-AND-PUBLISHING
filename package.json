@@ -16,7 +16,11 @@
     "check:security": "node scripts/check-security.mjs",
     "test:api": "node --env-file=.env tests/api.test.mjs",
     "test:e2e": "node --env-file=.env tests/e2e.test.mjs",
-    "verify": "npm run build && npm run check:security && npm audit --audit-level=high"
+    "verify": "npm run build && npm run check:security && npm audit --audit-level=high",
+    "build:ebooks": "node scripts/build-ebooks.js",
+    "prebuild": "node scripts/build-ebooks.js",
+    "predev": "node scripts/build-ebooks.js",
+    "test:ebook": "node tests/ebook-reader.test.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
@@ -27,8 +31,10 @@
     "lucide-react": "^0.577.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "^7.18.5",
     "recharts": "^3.10.1",
+    "remark-gfm": "^4.0.1",
     "zod": "^4.6.7"
   },
   "devDependencies": {

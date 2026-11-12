@@ -49,6 +49,28 @@ else {
   }
 }
 
+// 3. Paid eBook text: manuscripts are never committed, and no locked-chapter sentence reaches the bundle.
+const { BOOKS, OUT_DIR, lockedSentences, validateBook } = await import('./build-ebooks.js');
+for (const file of tracked) {
+  if (/^content\/ebooks\/.+\.(md|docx)$/i.test(file)) problems.push(`${file}: full eBook manuscript is committed — it must stay private (git rm --cached "${file}")`);
+}
+const bundleText = fs.existsSync(dist)
+  ? fs.readdirSync(path.join(dist, 'assets')).filter((f) => f.endsWith('.js')).map((f) => fs.readFileSync(path.join(dist, 'assets', f), 'utf8')).join('\n')
+  : '';
+const unescape = (s) => s.replace(/\\(["\\/])/g, '$1');
+for (const book of BOOKS) {
+  const jsonFile = path.join(OUT_DIR, `${book.slug}.json`);
+  const built = fs.existsSync(jsonFile) ? JSON.parse(fs.readFileSync(jsonFile, 'utf8')) : null;
+  if (built) for (const p of validateBook(built)) problems.push(`${path.relative('.', jsonFile)}: ${p}`);
+  if (built?.testBuild && tracked.includes(path.relative('.', jsonFile).replace(/\\/g, '/'))) problems.push(`${book.slug}.json was built from the TEST manuscript and is committed — rebuild from the real one`);
+  // Which manuscript produced the JSON? The real one when present, else the test fixture for test builds.
+  const manuscript = fs.existsSync(book.source) ? book.source : built?.testBuild ? 'tests/fixtures/sample-ebook.md' : null;
+  if (!manuscript || !bundleText) continue;
+  const leaks = lockedSentences(book, fs.readFileSync(manuscript, 'utf8')).filter((s) => bundleText.includes(s) || unescape(bundleText).includes(s));
+  if (leaks.length) problems.push(`browser bundle contains ${leaks.length} locked sentence(s) of "${book.title}", e.g. "${leaks[0].slice(0, 70)}…"`);
+  else console.log(`✓ ${book.title}: ${lockedSentences(book, fs.readFileSync(manuscript, 'utf8')).length} locked sentences checked — none in the browser bundle.`);
+}
+
 if (problems.length) {
   console.error(`✗ Security check failed (${problems.length}):\n` + problems.map((p) => `  • ${p}`).join('\n'));
   process.exit(1);

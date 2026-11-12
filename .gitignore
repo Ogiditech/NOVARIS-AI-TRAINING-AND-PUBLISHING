@@ -15,3 +15,9 @@ Thumbs.db
 
 # Test output
 tests/output/
+
+# Full eBook manuscripts — paid content, never commit (the repo is public).
+# Only the generated src/data/ebooks/*.json (free sample + teasers) is committed.
+content/ebooks/*.md
+content/ebooks/**/*.docx
+src/data/ebooks/index.json

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, ShoppingBag, Check, FileText, PenTool, Search, SearchX, Loader2, Award, Gift } from 'lucide-react';
+import { BookOpen, ShoppingBag, Check, FileText, PenTool, Search, SearchX, Loader2, Award, Gift, Clock, Lock, Sparkles } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import useApi from '../hooks/useApi';
 import useRequireLogin from '../hooks/useRequireLogin';
@@ -12,6 +12,50 @@ import { CardGridSkeleton, ErrorState } from '../components/states';
 import BookCover from '../components/BookCover';
 import PublishSection from '../components/PublishSection';
 import { categories, formatPrice } from '../data/constants';
+import { originals, coverProps } from '../data/originals';
+
+// Books written and published by Novaris (built from content/ebooks) — shown above the catalogue.
+function Originals() {
+  const { t, currency } = useApp();
+  if (!originals.length) return null;
+  return (
+    <section className="mb-10" aria-labelledby="originals-title">
+      <h2 id="originals-title" className="flex items-center gap-2 font-display text-xl font-semibold"><Sparkles size={18} className="text-gold" /> {t('originals.stripTitle')}</h2>
+      <p className="mt-1 text-sm text-muted">{t('originals.stripSub')}</p>
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        {originals.map((b) => {
+          const price = formatPrice(b.price, currency);
+          return (
+            <motion.article key={b.slug} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="glass flex gap-4 p-4 sm:gap-5 sm:p-5" data-original={b.slug}>
+              <Link to={`/ebooks/${b.slug}`} className="w-24 shrink-0 sm:w-32" aria-label={`${t('originals.details')}: ${b.title}`}>
+                <BookCover book={coverProps(b)} className="transition-shadow hover:shadow-glow" />
+              </Link>
+              <div className="flex min-w-0 flex-1 flex-col">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-violet-400">{t('originals.eyebrow')}</span>
+                  {b.status === 'coming-soon' && <span className="rounded-full bg-gold px-2 py-0.5 text-[10px] font-bold text-[#2a1a00]">{t('originals.comingSoon')}</span>}
+                </div>
+                <h3 className="mt-1 font-display text-lg font-bold leading-snug"><Link to={`/ebooks/${b.slug}`} className="hover:text-violet-400">{b.title}</Link></h3>
+                <p className="mt-0.5 line-clamp-2 text-xs text-muted">{b.subtitle}</p>
+                <p className="mt-1 text-xs">{t('originals.by', { author: b.author })}</p>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
+                  <span className="flex items-center gap-1"><BookOpen size={12} /> {t('originals.freeSections', { n: b.freeCount })}</span>
+                  <span className="flex items-center gap-1"><Lock size={12} /> {t('originals.sections', { n: b.sectionCount })}</span>
+                  <span className="flex items-center gap-1"><Clock size={12} /> {t('originals.readTime', { n: b.minutes })}</span>
+                  {price && <span className="font-display text-sm font-bold text-ink">{price}</span>}
+                </div>
+                <div className="mt-auto flex flex-wrap gap-2 pt-3">
+                  <Link to={`/ebooks/${b.slug}/read`} className="btn-primary !px-3 !py-2 text-xs"><BookOpen size={15} /> {t('originals.readSample')}</Link>
+                  <Link to={`/ebooks/${b.slug}`} className="btn-ghost !px-3 !py-2 text-xs">{t('originals.details')}</Link>
+                </div>
+              </div>
+            </motion.article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
 function BookCard({ book, index }) {
   const { t, toast, currency, acquired, markAcquired, setCheckout } = useApp();
@@ -108,6 +152,7 @@ export default function Ebooks() {
         eyebrow={t('store.ebooksTab')} title={t('ebooks.title')} sub={t('ebooks.sub')}
         action={<a href="#publish" className="btn-ghost"><PenTool size={16} /> {t('ebooks.publishTitle')}</a>}
       />
+      <Originals />
       <div className="mb-8 space-y-4">
         <label className="relative block max-w-md">
           <span className="sr-only">{t('ebooks.searchLabel')}</span>
