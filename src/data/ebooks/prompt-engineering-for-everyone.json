@@ -1,0 +1,70 @@
+{
+  "slug": "prompt-engineering-for-everyone",
+  "title": "Prompt Engineering for Everyone",
+  "subtitle": "A Novaris AI Training and Publishing Guide",
+  "author": "Samuel Gideon Omurok",
+  "publisher": "Novaris AI Training and Publishing",
+  "edition": "First edition, November 2026",
+  "price": 9.99,
+  "currency": "USD",
+  "status": "coming-soon",
+  "category": "Prompt Engineering",
+  "cover": [
+    "#9333ea",
+    "#db2777"
+  ],
+  "description": "This book teaches you how to ask AI tools for exactly what you need, so you get useful answers the first time. That skill is called prompt engineering.",
+  "minutes": 10,
+  "freeCount": 2,
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "free": true,
+      "minutes": 2,
+      "content": "This book teaches you how to ask AI tools for exactly what you need, so you get useful answers the first time. That skill is called prompt engineering. You do not need to code. If you can write a clear text message, you can learn it.\n\nA prompt is the message you type into an AI tool such as ChatGPT, Claude, Gemini or Microsoft Copilot. The AI reads your prompt and writes a reply. A vague prompt gets a vague reply. A clear prompt gets a clear, useful reply. The difference between the two is often just one or two extra sentences.\n\nThink of the AI as a very fast, very well-read new assistant who has never met you. It knows a lot about the world, but nothing about your shop in Kampala, your class in Dubai or your customers in Nairobi. Your prompt is the briefing you give that assistant.\n\n### Who this book is for\n\n- Small business owners who want help with marketing, customer messages and planning\n- Students and teachers who want better study notes, explanations and lesson ideas\n- Job seekers and office workers who write CVs, emails and reports\n- Anyone who has tried an AI tool, got a disappointing answer, and wondered why\n\n### What you will learn\n\n1. How AI chat tools read your words, and why small changes matter\n2. A simple five-part formula for writing strong prompts\n3. Proven techniques: giving examples, asking for steps, and improving answers through follow-ups\n4. Ready-made prompts for business, school, job search, farming, customer service and content creation\n5. How to spot wrong answers, protect private information and use AI responsibly\n6. How to build your own prompt library, with a 7-day practice plan\n\n### How to use this book\n\nKeep an AI tool open while you read. Every chapter has prompts you can copy, change and try straight away. Read a chapter, then practise for ten minutes. You will learn far more by trying than by reading alone.\n\nPrompts in this book are shown in boxes like this:\n\n```\nExplain what inflation is in three simple sentences, using an example from a market in Uganda.\n```\n\nReplace the details with your own. The words in square brackets, like \\[your business\\], are the parts you fill in."
+    },
+    {
+      "id": "chapter-1-how-ai-chat-tools-read-your-words",
+      "title": "Chapter 1: How AI Chat Tools Read Your Words",
+      "free": true,
+      "minutes": 1,
+      "content": "AI chat tools answer the question you actually typed, not the one in your head. Once you understand how they work, it becomes clear why clear prompts win.\n\n### What happens when you send a prompt\n\nAI chat tools are built on large language models. A language model learned patterns from a huge amount of text: books, websites, articles and code. When you send a prompt, it predicts, word by word, the reply that best fits your message.\n\nThis has three important results:\n\n- **It only knows what you tell it, plus what it learned.** It does not know your business, your country's latest prices or your manager's expectations unless you say so.\n- **It fills gaps with guesses.** If you leave out the audience, length or tone, the AI picks the most common option. That is usually generic.\n- **It can sound confident and still be wrong.** The AI is predicting likely words, not checking facts. Chapter 5 shows you how to catch mistakes.\n\n### Why the same question gets different answers\n\nAsk the same question twice and you may get two different replies. AI tools add a little randomness so their writing does not sound robotic. Small changes in your wording also change the result.\n\nCompare these two prompts.\n\n**Weak prompt:**\n\n```\nWrite a post about my restaurant.\n```\n\nThe AI does not know the restaurant's name, food, city, customers or the platform. It will write something bland that could describe any restaurant on earth.\n\n**Strong prompt:**\n\n```\nWrite a 60-word Facebook post for Mama Rose's Kitchen, a family restaurant in Ntinda, Kampala. We serve luwombo, matooke and fresh juice. The post should invite office workers to our new lunch special: any main plus juice for UGX 15,000, Monday to Friday. Friendly tone, end with our phone number: [number].\n```\n\nThe second prompt takes thirty seconds longer to write. The answer will need almost no editing.\n\n### Memory and conversations\n\nMost AI chat tools remember what you said earlier in the same conversation. You can build on previous answers: \"Make it shorter\" or \"Now write a version in Luganda.\" When you start a new chat, the AI usually starts fresh. Some tools offer memory features or custom instructions, but do not assume the AI remembers anything unless you have set this up.\n\n### Key idea\n\nThe AI is not reading your mind. It is reading your words. Every chapter in this book is about choosing those words well."
+    },
+    {
+      "id": "chapter-2-the-five-parts-of-a-good-prompt",
+      "title": "Chapter 2: The Five Parts of a Good Prompt",
+      "free": false,
+      "minutes": 1,
+      "teaser": "Most strong prompts have the same five parts: Role, Task, Context, Format and Examples. Remember them as R-T-C-F-E."
+    },
+    {
+      "id": "chapter-3-techniques-that-work",
+      "title": "Chapter 3: Techniques That Work",
+      "free": false,
+      "minutes": 1,
+      "teaser": "Six simple techniques will take your prompts from good to excellent. Each one is easy to learn and works in every major AI tool."
+    },
+    {
+      "id": "chapter-4-prompts-for-real-life-and-work",
+      "title": "Chapter 4: Prompts for Real Life and Work",
+      "free": false,
+      "minutes": 1,
+      "teaser": "This chapter gives you ready-made prompts for six areas of daily life. Copy them, replace the words in square brackets, and adjust them to your situation."
+    },
+    {
+      "id": "chapter-5-fixing-bad-answers-and-using-ai-responsibly",
+      "title": "Chapter 5: Fixing Bad Answers and Using AI Responsibly",
+      "free": false,
+      "minutes": 2,
+      "teaser": "Every AI tool sometimes gives answers that are wrong, vague or unsuitable. Knowing how to spot and fix them is what separates a skilled user from a frustrated one."
+    },
+    {
+      "id": "chapter-6-your-prompt-library-and-7-day-practice-plan",
+      "title": "Chapter 6: Your Prompt Library and 7-Day Practice Plan",
+      "free": false,
+      "minutes": 2,
+      "teaser": "The fastest way to master prompting is to save the prompts that work and practise a little every day. This chapter shows you how."
+    }
+  ]
+}

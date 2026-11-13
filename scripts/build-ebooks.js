@@ -69,6 +69,22 @@ export const BOOKS = [
     cover: ['#047857', '#0e7490'],
     free: [/^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
   },
+  {
+    slug: 'prompt-engineering-for-everyone',
+    source: 'content/ebooks/prompt-engineering-for-everyone.md',
+    title: 'Prompt Engineering for Everyone',
+    subtitle: 'A Novaris AI Training and Publishing Guide',
+    author: 'Samuel Gideon Omurok',
+    publisher: 'Novaris AI Training and Publishing',
+    edition: 'First edition, November 2026',
+    price: 9.99,
+    currency: 'USD',
+    status: 'coming-soon',
+    category: 'Prompt Engineering',
+    cover: ['#9333ea', '#db2777'],
+    free: [/^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
+    skip: [/^contents$/i], // printed table of contents — the reader shows its own
+  },
 ];
 
 /** Headings may contain HTML entities from editors (e.g. "About the Author&#32;"). */
@@ -143,6 +159,9 @@ export function splitSections(md) {
   return sections.map((s) => ({ title: s.title, body: s.body.join('\n').trim() }));
 }
 
+/** The book's sections, minus any the config skips (e.g. a printed "Contents" list — the reader has its own). */
+const bookSections = (config, md) => splitSections(md).filter((s) => !(config.skip || []).some((re) => re.test(s.title)));
+
 function frontMatter(md) {
   const m = md.replace(/^﻿/, '').match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!m) return {};
@@ -151,7 +170,7 @@ function frontMatter(md) {
 
 /** Builds the public JSON for one book. Locked sections never get a `content` field. */
 export function buildBook(config, md) {
-  const sections = splitSections(md);
+  const sections = bookSections(config, md);
   if (!sections.length) throw new Error(`${config.source}: no "## " headings found — each section must start with "## Title".`);
   const ids = new Set();
   const out = sections.map((s) => {
@@ -167,7 +186,7 @@ export function buildBook(config, md) {
   const fm = frontMatter(md);
   const intro = sections.find((s) => /^introduction\b/i.test(s.title)) || sections[0];
   const description = fm.description || sentences(plainText(intro.body)).slice(0, 2).join(' ');
-  const { source, free, teasers, ...meta } = config;
+  const { source, free, teasers, skip, ...meta } = config;
   return {
     ...meta,
     description,
@@ -180,15 +199,22 @@ export function buildBook(config, md) {
 /** Sentences of locked sections that must never appear in anything shipped to the browser. */
 export function lockedSentences(config, md) {
   const result = [];
-  const all = splitSections(md);
+  const all = bookSections(config, md);
   const isFree = (s) => config.free.some((re) => re.test(s.title));
   // A sentence repeated word-for-word in a free section is public anyway, so it is not a leak.
   const publicText = all.filter(isFree).map((s) => plainText(s.body)).join(' ');
+  const publicRaw = all.filter(isFree).map((s) => s.body).join('\n');
   for (const s of all) {
     if (isFree(s)) continue;
     const teaser = teaserFor(s.body, config.teasers?.[s.title]);
     for (const sentence of sentences(plainText(s.body))) {
       if (sentence.length >= 40 && !teaser.includes(sentence) && !publicText.includes(sentence)) result.push(sentence);
+    }
+    // Code boxes (often the paid prompts and templates) are not prose, so check them line by line.
+    for (const [, code] of s.body.matchAll(/```[^\n]*\n([\s\S]*?)```/g)) {
+      for (const line of code.split(/\r?\n/).map((l) => l.trim())) {
+        if (line.length >= 40 && !publicRaw.includes(line)) result.push(line);
+      }
     }
   }
   return result;

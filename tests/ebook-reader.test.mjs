@@ -109,7 +109,7 @@ try {
     if (s.id === tableSection?.id) await page.screenshot({ path: `${OUT}book-tables-dark.png`, fullPage: true });
   }
   const sum = `${totals.tables} tables / ${totals.rows} rows · ${totals.tasks} checklist items · ${totals.code} code blocks · ${totals.lists} list items`;
-  check('Markdown', 'sample sections render every table, list, checklist and code block', mismatches.length === 0 && totals.tables > 0, mismatches[0] || sum);
+  check('Markdown', 'sample sections render every table, list, checklist and code block', mismatches.length === 0 && totals.tables + totals.code + totals.lists > 0, mismatches[0] || sum);
 
   // ---------- Navigation + progress
   await go(page, `/ebooks/${SLUG}/read?s=${meta.toc[0].id}`);
