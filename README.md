@@ -104,4 +104,4 @@ The site deploys on **Vercel**. Add `DATABASE_URL` and `JWT_SECRET` as environme
 
 ## Author
 
-**Omurok Samuel Gideon** ([@Ogiditech](https://github.com/Ogiditech))
+**Samuel Gideon Omurok** ([@Ogiditech](https://github.com/Ogiditech))
