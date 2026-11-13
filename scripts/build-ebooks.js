@@ -35,6 +35,11 @@ export const BOOKS = [
     cover: ['#6d28d9', '#c2780a'],
     // Sections readable for free. Everything else is locked.
     free: [/^a note from the author\b/i, /^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
+    // Public teasers chosen by hand (keyed by section title). The author bio teaser avoids personal
+    // details such as birth year, birthplace and schools; the full bio stays in the paid edition.
+    teasers: {
+      'About the Author': 'Samuel Gideon Omurok is the founder of Novaris AI Training and Publishing. Through Novaris, he helps business owners, professionals and beginners around the world use AI practically, safely and confidently.',
+    },
   },
   {
     slug: 'ai-for-beginners',
@@ -50,6 +55,9 @@ export const BOOKS = [
     category: 'AI Basics',
     cover: ['#1d4ed8', '#0d9488'],
     free: [/^copyright\b/i, /^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
+    teasers: {
+      'About the Author': 'Samuel Gideon Omurok is the founder of Novaris AI Training and Publishing. He believes anyone willing to learn can benefit from AI, whatever their starting point.',
+    },
   },
 ];
 
@@ -99,7 +107,9 @@ export function sentences(text) {
 
 const countWords = (md) => (plainText(md).match(/\S+/g) || []).length;
 
-function teaserFor(md) {
+// Priority: teaser set in the book's config (by section title) → <!-- teaser: --> in the manuscript → first two sentences.
+function teaserFor(md, override) {
+  if (override) return override.replace(/\s+/g, ' ').trim();
   const custom = md.match(/<!--\s*teaser:\s*([\s\S]*?)-->/i);
   if (custom) return custom[1].replace(/\s+/g, ' ').trim();
   const t = sentences(plainText(md)).slice(0, 2).join(' ');
@@ -142,12 +152,12 @@ export function buildBook(config, md) {
     const minutes = Math.max(1, Math.round(countWords(s.body) / WORDS_PER_MINUTE));
     return free
       ? { id, title: s.title, free: true, minutes, content: s.body.replace(/<!--[\s\S]*?-->\n?/g, '').trim() }
-      : { id, title: s.title, free: false, minutes, teaser: teaserFor(s.body) };
+      : { id, title: s.title, free: false, minutes, teaser: teaserFor(s.body, config.teasers?.[s.title]) };
   });
   const fm = frontMatter(md);
   const intro = sections.find((s) => /^introduction\b/i.test(s.title)) || sections[0];
   const description = fm.description || sentences(plainText(intro.body)).slice(0, 2).join(' ');
-  const { source, free, ...meta } = config;
+  const { source, free, teasers, ...meta } = config;
   return {
     ...meta,
     description,
@@ -166,7 +176,7 @@ export function lockedSentences(config, md) {
   const publicText = all.filter(isFree).map((s) => plainText(s.body)).join(' ');
   for (const s of all) {
     if (isFree(s)) continue;
-    const teaser = teaserFor(s.body);
+    const teaser = teaserFor(s.body, config.teasers?.[s.title]);
     for (const sentence of sentences(plainText(s.body))) {
       if (sentence.length >= 40 && !teaser.includes(sentence) && !publicText.includes(sentence)) result.push(sentence);
     }
