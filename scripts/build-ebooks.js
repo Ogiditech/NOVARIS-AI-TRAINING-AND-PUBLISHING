@@ -47,7 +47,7 @@ export const BOOKS = [
     author: 'Samuel Gideon Omurok',
     publisher: 'Novaris AI Training and Publishing',
     edition: 'First edition, November 2026',
-    price: null, // not set yet — the Buy button shows without a price until one is added
+    price: 7.99,
     currency: 'USD',
     status: 'coming-soon',
     category: 'AI Basics',
