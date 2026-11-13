@@ -1,0 +1,84 @@
+{
+  "slug": "ai-for-beginners",
+  "title": "AI for Beginners",
+  "subtitle": "A Novaris AI Training and Publishing Guide",
+  "author": "Samuel Gideon Omurok",
+  "publisher": "Novaris AI Training and Publishing",
+  "edition": "First edition, November 2026",
+  "price": null,
+  "currency": "USD",
+  "status": "coming-soon",
+  "category": "AI Basics",
+  "cover": [
+    "#1d4ed8",
+    "#0d9488"
+  ],
+  "description": "This book is for anyone who has heard about artificial intelligence but has never used it with confidence. You do not need a technical background, a computer science degree or any coding skills.",
+  "minutes": 13,
+  "freeCount": 3,
+  "sections": [
+    {
+      "id": "copyright-and-disclaimer",
+      "title": "Copyright and Disclaimer",
+      "free": true,
+      "minutes": 1,
+      "content": "© 2026 Novaris AI Training and Publishing. All rights reserved.\n\nNo part of this book may be copied, shared or reproduced in any form without written permission from the publisher, except for short quotations in reviews.\n\nFirst edition, November 2026.\n\nChatGPT, Claude, Gemini and Copilot are trademarks of their respective owners. Novaris AI Training and Publishing is not affiliated with or endorsed by these companies.\n\n### Disclaimer\n\nThis book is for general education only. It is not legal, financial, medical or professional advice. AI tools, features and prices change quickly; the information here was current as of November 2026. Always check important facts with official sources and qualified professionals before acting on them. The author and publisher accept no liability for decisions made based on this book."
+    },
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "free": true,
+      "minutes": 1,
+      "content": "This book is for anyone who has heard about artificial intelligence but has never used it with confidence. You do not need a technical background, a computer science degree or any coding skills. If you can send a message on your phone, you can use AI.\n\nAI is no longer something only engineers talk about. Teachers use it to plan lessons. Shop owners use it to write product descriptions. Students use it to understand hard topics. Job seekers use it to improve their CVs. People who learn to use it well save hours every week, and people who ignore it risk being left behind.\n\n### What you will learn\n\nBy the end of this guide, you will be able to:\n\n- Explain in simple words what AI is and what it is not\n- Understand how popular AI assistants like ChatGPT, Claude and Gemini work\n- Write clear instructions (called prompts) that get useful answers\n- Use AI for real tasks at work, in your studies, in business and at home\n- Protect your privacy and spot AI mistakes before they cause problems\n- Follow a simple 30-day plan to build the habit of using AI\n\n### How to use this book\n\nEach chapter is short and practical. Read one chapter at a time, then try the exercise at the end before moving on. Keep an AI assistant open on your phone or computer as you read, and test the examples yourself. Reading about AI helps, but using it is how you really learn.\n\nLet us begin with the most basic question: what exactly is AI?"
+    },
+    {
+      "id": "chapter-1-what-ai-really-is",
+      "title": "Chapter 1: What AI Really Is",
+      "free": true,
+      "minutes": 2,
+      "content": "Artificial intelligence (AI) is technology that lets computers do tasks that normally need human thinking: understanding language, recognising images, making predictions and solving problems. In simple terms, AI is software that learns patterns from large amounts of examples and then uses those patterns to respond to new situations.\n\n### A simple way to think about it\n\nImagine teaching a child to recognise a mango. You do not give them a rulebook. You show them many mangoes of different sizes and colours until they can spot one on their own. AI learns in a similar way. Instead of being told every rule, it is shown millions of examples and finds the patterns itself.\n\n### AI you already use\n\nYou probably use AI every day without noticing:\n\n- **Your phone keyboard** suggests the next word as you type\n- **Maps apps** predict traffic and suggest faster routes\n- **Streaming services** recommend films and music you might like\n- **Banks** flag unusual card payments that could be fraud\n- **Email** filters spam out of your inbox\n\nWhat is new is that AI can now hold a conversation, write, summarise, translate and explain. These tools are called AI assistants, and they are what this book focuses on.\n\n### A very short history\n\nThe idea of thinking machines goes back to the 1950s, when researchers first used the term \"artificial intelligence\". For decades progress was slow because computers were not powerful enough and there was not enough data. In the 2010s, faster computers and the huge amount of text and images on the internet changed everything. In late 2022, ChatGPT made conversational AI available to the public, and AI assistants spread around the world faster than almost any technology before them.\n\n### Myths and reality\n\n| Myth | Reality |\n| --- | --- |\n| AI thinks and feels like a human | AI finds patterns in data; it does not have human feelings or life experience |\n| AI is always right | AI can make confident mistakes, so important facts must be checked |\n| AI is only for programmers | Most AI assistants work with plain, everyday language |\n| AI will replace everyone's job | AI changes many jobs; people who use it well often become more valuable |\n| AI is too expensive to try | Many good AI assistants have free versions |\n\n### Key words to know\n\n- **AI assistant:** a chat tool you talk to in plain language, such as ChatGPT, Claude or Gemini\n- **Prompt:** the message or instruction you give the AI\n- **Model:** the trained \"brain\" behind an AI tool\n- **Generative AI:** AI that creates new content such as text, images or audio\n\n### Try it yourself\n\nOpen any free AI assistant and type: *\"Explain what artificial intelligence is to a 12-year-old, using an example from everyday life.\"* Read the answer, then ask a follow-up question about anything that is unclear. You have just had your first real AI conversation."
+    },
+    {
+      "id": "chapter-2-how-ai-assistants-work",
+      "title": "Chapter 2: How AI Assistants Work",
+      "free": false,
+      "minutes": 2,
+      "teaser": "AI assistants like ChatGPT, Claude and Gemini are powered by large language models (LLMs): programs trained on huge amounts of text to predict which words should come next. That simple idea, repeated billions of times, produces answers that read like a knowledgeable person wrote them."
+    },
+    {
+      "id": "chapter-3-your-first-conversations-with-ai",
+      "title": "Chapter 3: Your First Conversations with AI",
+      "free": false,
+      "minutes": 1,
+      "teaser": "The quality of the answer you get depends mostly on the quality of the prompt you give. A clear, specific prompt can turn a vague, generic reply into something you can use straight away."
+    },
+    {
+      "id": "chapter-4-everyday-uses-of-ai",
+      "title": "Chapter 4: Everyday Uses of AI",
+      "free": false,
+      "minutes": 2,
+      "teaser": "The best way to learn AI is to use it on tasks you already do. Below are practical uses in four areas of life, each with a prompt you can copy and adapt."
+    },
+    {
+      "id": "chapter-5-using-ai-safely-and-responsibly",
+      "title": "Chapter 5: Using AI Safely and Responsibly",
+      "free": false,
+      "minutes": 2,
+      "teaser": "AI is a powerful helper, but like any tool it must be used with care. Four habits will protect you: guard your privacy, check the facts, watch for scams and use AI honestly."
+    },
+    {
+      "id": "chapter-6-your-next-steps-with-ai",
+      "title": "Chapter 6: Your Next Steps with AI",
+      "free": false,
+      "minutes": 1,
+      "teaser": "You now know what AI is, how it works, how to talk to it and how to stay safe. The final step is turning that knowledge into a daily habit, and 15 minutes a day for 30 days is enough to get there."
+    },
+    {
+      "id": "about-the-author",
+      "title": "About the Author",
+      "free": false,
+      "minutes": 1,
+      "teaser": "Samuel Gideon Omurok is the founder of Novaris AI Training and Publishing. He was born in Serere District, Uganda, and holds a Diploma in Business Administration from Makerere Institute for Social Development."
+    }
+  ]
+}

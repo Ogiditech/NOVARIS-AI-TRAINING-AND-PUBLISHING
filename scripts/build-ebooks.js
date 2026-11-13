@@ -36,7 +36,28 @@ export const BOOKS = [
     // Sections readable for free. Everything else is locked.
     free: [/^a note from the author\b/i, /^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
   },
+  {
+    slug: 'ai-for-beginners',
+    source: 'content/ebooks/ai-for-beginners.md',
+    title: 'AI for Beginners',
+    subtitle: 'A Novaris AI Training and Publishing Guide',
+    author: 'Samuel Gideon Omurok',
+    publisher: 'Novaris AI Training and Publishing',
+    edition: 'First edition, November 2026',
+    price: null, // not set yet — the Buy button shows without a price until one is added
+    currency: 'USD',
+    status: 'coming-soon',
+    category: 'AI Basics',
+    cover: ['#1d4ed8', '#0d9488'],
+    free: [/^copyright\b/i, /^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
+  },
 ];
+
+/** Headings may contain HTML entities from editors (e.g. "About the Author&#32;"). */
+const decodeEntities = (s) => s
+  .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+  .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+  .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
 
 const WORDS_PER_MINUTE = 220;
 
@@ -95,7 +116,7 @@ export function splitSections(md) {
     if (/^\s*(```|~~~)/.test(line)) inFence = !inFence;
     const h = !inFence && line.match(/^##\s+(.+?)\s*#*\s*$/);
     if (h) {
-      current = { title: h[1].trim(), body: [] };
+      current = { title: decodeEntities(h[1]).replace(/\s+/g, ' ').trim(), body: [] };
       sections.push(current);
     } else if (current) current.body.push(line);
   }

@@ -9,7 +9,8 @@ import { BOOKS, lockedSentences } from '../scripts/build-ebooks.js';
 const BASE = process.env.BASE || 'http://localhost:5173';
 const OUT = fileURLToPath(new URL('./output/', import.meta.url));
 fs.mkdirSync(OUT, { recursive: true });
-const config = BOOKS[0];
+// BOOK=<slug> tests another book (default: the first one in scripts/build-ebooks.js).
+const config = BOOKS.find((b) => b.slug === process.env.BOOK) || BOOKS[0];
 const SLUG = config.slug;
 const index = JSON.parse(fs.readFileSync(new URL(`../src/data/ebooks/index.json`, import.meta.url), 'utf8'));
 const meta = index.find((b) => b.slug === SLUG);
@@ -73,7 +74,7 @@ try {
   const buy = await page.evaluate(() => { const b = [...document.querySelectorAll('button')].find((x) => x.innerText.includes('Buy eBook')); return b && { disabled: b.disabled, badge: /coming soon/i.test(b.parentElement.innerText) }; });
   check('Detail', 'cover, title, subtitle, author, description', await page.$('[data-book] .aspect-\\[3\\/4\\]') && tx.includes(meta.title) && tx.includes(meta.subtitle) && tx.includes(meta.author) && tx.includes(meta.description.slice(0, 40)));
   check('Detail', '"Read free sample" button + Buy shows "Coming soon" (disabled)', tx.includes('Read free sample') && buy?.disabled && buy?.badge, JSON.stringify(buy));
-  check('Detail', 'publisher, edition and price shown', tx.includes('Novaris AI Training and Publishing') && tx.includes('First edition, November 2026') && /\$9\.99|9\.99/.test(tx));
+  check('Detail', 'publisher, edition and price shown', tx.includes(meta.publisher) && tx.includes(meta.edition) && (!meta.price || tx.includes(String(meta.price))));
   const locks = await page.$$eval('ol li svg[aria-label="Locked"]', (l) => l.length);
   check('Detail', 'contents list: free sections linked, locked ones marked', locks === meta.toc.filter((s) => !s.free).length, `${locks} locks`);
   await page.screenshot({ path: `${OUT}book-detail-dark.png` });
