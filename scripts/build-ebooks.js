@@ -35,11 +35,9 @@ export const BOOKS = [
     cover: ['#6d28d9', '#c2780a'],
     // Sections readable for free. Everything else is locked.
     free: [/^a note from the author\b/i, /^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
-    // Public teasers chosen by hand (keyed by section title). The author bio teaser avoids personal
-    // details such as birth year, birthplace and schools; the full bio stays in the paid edition.
-    teasers: {
-      'About the Author': 'Samuel Gideon Omurok is the founder of Novaris AI Training and Publishing. Through Novaris, he helps business owners, professionals and beginners around the world use AI practically, safely and confidently.',
-    },
+    // Optional hand-picked teasers, keyed by section title, e.g. teasers: { 'Extras': '…' }.
+    // None set: every locked section uses its first two sentences (the author bio teaser
+    // intentionally shows birth year, birthplace and schools, at the author's request).
   },
   {
     slug: 'ai-for-beginners',
@@ -55,9 +53,6 @@ export const BOOKS = [
     category: 'AI Basics',
     cover: ['#1d4ed8', '#0d9488'],
     free: [/^copyright\b/i, /^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
-    teasers: {
-      'About the Author': 'Samuel Gideon Omurok is the founder of Novaris AI Training and Publishing. He believes anyone willing to learn can benefit from AI, whatever their starting point.',
-    },
   },
 ];
 
