@@ -51,16 +51,30 @@ export function plainText(md) {
     .replace(/`([^`]*)`/g, '$1')
     .split(/\r?\n/)
     .filter((l) => !/^\s*\|/.test(l)) // table rows
-    .map((l) => l.replace(/^\s{0,3}#{1,6}\s+/, '').replace(/^\s*>\s?/, '').replace(/^\s*(?:[-*+]|\d+[.)])\s+(?:\[[ xX]\]\s+)?/, ''))
+    .map((l) => (/^\s{0,3}#{1,6}\s/.test(l) ? '' : l)) // headings are labels, not sentences
+    .map((l) => l.replace(/^\s*>\s?/, '').replace(/^\s*(?:[-*+]|\d+[.)])\s+(?:\[[ xX]\]\s+)?/, ''))
     .join('\n')
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/(\*\*|__|\*|_|~~)(?=\S)([\s\S]*?\S)\1/g, '$2')
+    .replace(/\\$/gm, '') // hard line breaks
+    .replace(/\\([\\`*_{}[\]()#+\-.!|<>~])/g, '$1') // Markdown escapes: \[ → [
     .replace(/\s+/g, ' ')
     .trim();
 }
 
-export const sentences = (text) => text.split(/(?<=[.!?…]["”’)]?)\s+(?=["“‘(]?[A-Z0-9])/).map((s) => s.trim()).filter(Boolean);
+// Abbreviations that end in a full stop but do not end a sentence ("St. Aloysius", "Mr. Kumar").
+const ABBREVIATION = /\b(?:Mr|Mrs|Ms|Dr|St|Prof|Sr|Jr|No|vs|etc|e\.g|i\.e|approx)\.$/i;
+export function sentences(text) {
+  const out = [];
+  for (const piece of text.split(/(?<=[.!?…]["”’)]?)\s+(?=["“‘(]?[A-Z0-9])/)) {
+    const p = piece.trim();
+    if (!p) continue;
+    if (out.length && ABBREVIATION.test(out[out.length - 1])) out[out.length - 1] += ` ${p}`;
+    else out.push(p);
+  }
+  return out;
+}
 
 const countWords = (md) => (plainText(md).match(/\S+/g) || []).length;
 
@@ -125,11 +139,15 @@ export function buildBook(config, md) {
 /** Sentences of locked sections that must never appear in anything shipped to the browser. */
 export function lockedSentences(config, md) {
   const result = [];
-  for (const s of splitSections(md)) {
-    if (config.free.some((re) => re.test(s.title))) continue;
+  const all = splitSections(md);
+  const isFree = (s) => config.free.some((re) => re.test(s.title));
+  // A sentence repeated word-for-word in a free section is public anyway, so it is not a leak.
+  const publicText = all.filter(isFree).map((s) => plainText(s.body)).join(' ');
+  for (const s of all) {
+    if (isFree(s)) continue;
     const teaser = teaserFor(s.body);
     for (const sentence of sentences(plainText(s.body))) {
-      if (sentence.length >= 40 && !teaser.includes(sentence)) result.push(sentence);
+      if (sentence.length >= 40 && !teaser.includes(sentence) && !publicText.includes(sentence)) result.push(sentence);
     }
   }
   return result;

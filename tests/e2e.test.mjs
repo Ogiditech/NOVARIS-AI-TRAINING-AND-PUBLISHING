@@ -15,6 +15,8 @@ const EMAIL = 'test@novaris.com';
 const PASSWORD = 'Test1234!';
 const phase = process.argv[2] || 'all';
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+// Wait until the page has finished talking to the server (saves, grading), then a moment for the UI to update.
+const settle = async (page) => { await wait(300); await page.waitForNetworkIdle({ idleTime: 400, timeout: 15000 }).catch(() => {}); await wait(300); };
 const results = [];
 const check = (area, name, ok, detail = '') => { results.push({ area, name, ok: !!ok, detail }); console.log(`${ok ? 'PASS' : 'FAIL'} | ${area} | ${name}${detail ? ' — ' + detail : ''}`); };
 const consoleIssues = [];
@@ -108,7 +110,14 @@ try {
     // ---------------- courses: filter, search, sort
     await go(page, '/courses');
     const chip = (label, opt) => page.evaluate((label, opt) => { const lab = [...document.querySelectorAll('p.label')].find((p) => p.textContent.trim() === label); [...lab.nextElementSibling.querySelectorAll('button')].find((x) => x.textContent.trim() === opt).click(); }, label, opt);
-    const count = async () => { await wait(1600); return page.evaluate(() => document.querySelectorAll('main [data-course]').length); };
+    // Count once the grid has settled: the same number on three readings 500 ms apart (database replies vary in speed).
+    const count = async () => {
+      await wait(800);
+      const read = () => page.evaluate(() => document.querySelectorAll('main [data-course]').length);
+      let last = await read(); let same = 0;
+      for (let i = 0; i < 20 && same < 2; i++) { await wait(500); const n = await read(); same = n === last ? same + 1 : 0; last = n; }
+      return last;
+    };
     check('Courses', 'library loads 18 courses from the database', (await count()) === 18);
     await chip('Category', 'AI Agents'); const agents = await count();
     await chip('Level', 'Advanced'); const agentsAdv = await count();
@@ -159,15 +168,15 @@ try {
       await clickText(page, 'main button', 'Mark lesson complete');
       const instant = await page.evaluate(() => [...document.querySelectorAll('main button')].some((b) => b.textContent.trim().endsWith('Completed')));
       if (i === 0) check('Lesson player', 'ticking complete updates instantly (optimistic)', instant);
-      await wait(1100);
+      await settle(page);
       if (i < lessons.length - 1) {
         if (i === 1) {
           const key = await answerKey(lessons[i].id);
           await page.evaluate((key) => { document.querySelectorAll('[role=radiogroup]').forEach((g, j) => g.querySelectorAll('[role=radio]')[key[j]].click()); }, key);
-          await clickText(page, 'button', 'Check answer'); await wait(900);
+          await clickText(page, 'button', 'Check answer'); await settle(page);
         }
         await clickText(page, 'main button', 'Next lesson');
-        await wait(900);
+        await settle(page);
       }
     }
     const certModal = await waitFor(page, () => document.body.innerText.includes('Course complete!'), null, 10000);

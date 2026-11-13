@@ -1,0 +1,91 @@
+{
+  "slug": "ai-for-business",
+  "title": "AI for Business",
+  "subtitle": "A Practical Guide to Saving Time, Winning Customers and Growing with AI",
+  "author": "Samuel Gideon Omurok",
+  "publisher": "Novaris AI Training and Publishing",
+  "edition": "First edition, November 2026",
+  "price": 9.99,
+  "currency": "USD",
+  "status": "coming-soon",
+  "category": "AI for Business",
+  "cover": [
+    "#6d28d9",
+    "#c2780a"
+  ],
+  "description": "AI is no longer a tool for big companies with big budgets. Today, a shop owner in Kampala, a consultant in Dubai and a bakery in Manchester can all use the same AI assistants that large corporations use, often for free or for the price of a monthly phone bill.",
+  "minutes": 30,
+  "freeCount": 3,
+  "sections": [
+    {
+      "id": "a-note-from-the-author",
+      "title": "A Note from the Author",
+      "free": true,
+      "minutes": 2,
+      "content": "My name is Samuel Gideon Omurok. I am from Uganda, and in September 2015 I came to the United Arab Emirates to build a better life for my family. For years I worked as a security guard, long shifts, watching screens and doors, while dreaming of doing something more.\n\nI decided to train in AWS cloud computing with K21Academy. I believed it was my way into the technology world, and I was inspired by Mr. Atul Kumar, whose teaching and encouragement kept me motivated even on my hardest days. The training was not the problem; the fees were. Life was hard, and I could not keep up with the tuition payments, and I missed my certification not once, but twice. People around me kept asking what was happening to me. I found myself under serious financial pressure, carrying the weight of providing for my family.\n\nThen the job rejections came, one after another. I applied again and again, hoping to move into a new career, but the change I was working so hard for never seemed to arrive.\n\nAt my lowest point, I made a decision: if the old road was blocked, I would start something different.\n\nThat is when I found the London International Studies and Research Centre (LISRC) in Dubai. They listened to my story and guided me toward a program in agentic AI. That training changed my thinking. I stopped waiting for someone to give me a chance in technology and started creating my own opportunities. With AI as my assistant, I could build web apps, software products and websites, things I once believed only trained engineers could create. I am still completing my training, but I have already built real projects, and Novaris AI Training and Publishing is one of them.\n\nI wrote this book because I know what it feels like to be told, by life or by yourself, that technology is not for you. It is. You do not need a computer science degree or a large budget. You need curiosity, a willingness to practice, and a clear guide.\n\nThis is that guide. If AI can open doors for a security guard facing financial pressure and missed exams, it can open doors for your business too.\n\nSamuel Gideon Omurok\\\nFounder, Novaris AI Training and Publishing"
+    },
+    {
+      "id": "introduction-why-every-business-now-needs-ai",
+      "title": "Introduction: Why Every Business Now Needs AI",
+      "free": true,
+      "minutes": 2,
+      "content": "AI is no longer a tool for big companies with big budgets. Today, a shop owner in Kampala, a consultant in Dubai and a bakery in Manchester can all use the same AI assistants that large corporations use, often for free or for the price of a monthly phone bill.\n\nThat changes the game for small businesses. For years, big companies won because they could afford marketing teams, copywriters, analysts and customer service staff. Now one person with the right AI tools can write a week of social media posts in an hour, answer customer questions at midnight, and turn a messy idea into a clear business plan before lunch.\n\n### What has changed\n\nThree things happened at once. First, AI tools became easy to use: you type a request in normal language, and the tool replies the same way. No coding is needed. Second, they became cheap: most offer a free version that is good enough to start. Third, they became genuinely useful: today's tools can write, summarize, translate, analyze and plan at a level that saves real hours every week.\n\nThe result is simple. Businesses that learn to use AI well will move faster, spend less and serve customers better. Businesses that ignore it will slowly fall behind competitors who did not.\n\n### Why small businesses have the advantage\n\nIt may sound surprising, but small businesses are often better placed to benefit from AI than large ones. A large company needs months of meetings, approvals and IT checks before it can try a new tool. You can try one this afternoon.\n\nYou also know your customers personally. AI is most powerful when it is guided by someone who understands the business, the customers and the local market. That person is you. AI does not replace your knowledge; it multiplies it.\n\n### What this guide will and will not do\n\nThis guide is practical. It will not drown you in technical terms or the history of computer science. Instead, it shows you where AI fits in a real business, which tasks to start with, and exactly what to type to get good results.\n\nYou will not become an AI engineer by reading it. You will become a business owner who uses AI confidently, safely and profitably, which is far more valuable for most people.\n\n### How to use this guide\n\nRead Chapters 1 and 2 first. They give you the foundation and your first quick wins. After that, jump to the chapter that matches your biggest need: marketing and sales (Chapter 3) or customer service and daily operations (Chapter 4). Read Chapter 5 before you use AI with customer information. Finish with Chapter 6, your 30-day action plan.\n\nEvery chapter includes:\n\n- **Real examples** from different kinds of businesses, including a restaurant, a retail shop, a consultant and a tour company.\n- **Try it now** exercises you can complete in 10 to 20 minutes.\n- **Ready-to-use prompts** you can copy, adjust and paste into any AI assistant.\n- **A short summary** so you can review the key points quickly.\n\nA quick note on tools: AI products change fast. New features appear every month, and prices change. This guide focuses on skills that stay useful no matter which tool you choose. Where a tool is named, treat it as an example, and always check the provider's website for the latest features and pricing.\n\nLet's begin by clearing up what AI actually is."
+    },
+    {
+      "id": "chapter-1-what-ai-really-is-and-isn-t",
+      "title": "Chapter 1: What AI Really Is (and Isn't)",
+      "free": true,
+      "minutes": 4,
+      "content": "AI is software that has learned patterns from huge amounts of information and uses those patterns to produce useful answers, text, images and decisions. That is the whole idea in one sentence. Everything else is detail.\n\n### AI in plain language\n\nThink of a new employee who has read millions of books, websites, manuals and emails. This employee has never worked in your business, but has seen thousands of examples of marketing emails, customer replies, business plans and product descriptions. When you ask for help, they draw on all those examples to write something that fits your request.\n\nThat is roughly how today's AI assistants work. They are very good at recognizing patterns in language and producing new text that follows those patterns. They are fast, tireless and available 24 hours a day.\n\nBut like a new employee, they do not know your business unless you tell them. They do not know your prices, your customers, your tone of voice or your local market. The more context you give, the better the result. This is the single most important lesson in this guide, and we will come back to it many times.\n\n### The main types of AI tools for business\n\nYou do not need to understand how AI is built. You only need to know which kind of tool does which job.\n\n| Type of tool | What it does | Example business uses |\n| --- | --- | --- |\n| Chat assistants | Answer questions and write text in conversation | Emails, social posts, plans, summaries, translations |\n| Image tools | Create or edit pictures from a written description | Social media graphics, product mock-ups, flyers |\n| Voice and transcription tools | Turn speech into text and text into speech | Meeting notes, voice-overs, call summaries |\n| Chatbots for websites | Answer customer questions automatically | FAQs, booking help, order tracking |\n| Automation tools | Connect apps so tasks happen on their own | Saving form entries to a spreadsheet, sending follow-up emails |\n| AI inside everyday software | AI features built into email, documents and spreadsheets | Drafting replies, summarizing long documents, analyzing figures |\n\nMost small businesses get the biggest results from the first type, the chat assistant. Popular examples include ChatGPT, Claude, Google Gemini and Microsoft Copilot. They all work in a similar way, and all offer a free version to start with.\n\n### Five common myths about AI\n\n**Myth 1: AI is only for tech companies.** Today's tools are designed for ordinary people. If you can send a WhatsApp message, you can use an AI assistant.\n\n**Myth 2: AI will replace my staff.** In small businesses, AI usually replaces boring tasks, not people. It frees your team to spend more time with customers and on work that needs human judgment.\n\n**Myth 3: AI is always right.** It is not. AI can state wrong information with total confidence. Experts call this a \"hallucination\". You must always check facts, figures, prices, laws and names before using them. Chapter 5 shows you how.\n\n**Myth 4: AI is too expensive.** Most tools have free plans, and paid plans often cost less than a single hour of a freelancer's time per month.\n\n**Myth 5: Using AI is cheating.** Using AI to draft a document is like using a calculator for sums or a spell checker for typing. What matters is that the final work is accurate, honest and genuinely useful to your customer.\n\n### What AI does well, and what it does badly\n\nKnowing the limits of AI saves you time and protects your reputation.\n\n**AI does well at:**\n\n- Writing first drafts quickly: emails, posts, descriptions, letters and reports.\n- Summarizing long documents, meeting notes and customer reviews.\n- Brainstorming ideas, names, slogans and campaign angles.\n- Rewriting text in a different tone, length or language.\n- Explaining difficult topics in simple words.\n- Organizing messy information into lists, tables and plans.\n\n**AI does badly at:**\n\n- Knowing recent facts, prices or news unless it can search the web.\n- Knowing anything specific about your business that you have not told it.\n- Doing exact calculations without being checked, especially in long tasks.\n- Making final decisions that need judgment, ethics or local knowledge.\n- Understanding feelings and relationships the way you do.\n\nThe best way to think about AI is as a fast, capable assistant who needs clear instructions and whose work you always review. You stay the manager. AI does the heavy lifting.\n\n### Example: one morning, two shop owners\n\nGrace and David both run small clothing shops. On Monday morning, both need to write a promotion for a weekend sale.\n\nDavid sits down with a blank page. After an hour, he has one Facebook post he is not happy with.\n\nGrace opens an AI assistant and types: \"I run a women's clothing shop in a busy shopping area. We're having a 20% off sale this weekend on summer dresses. Write five short Facebook posts and one WhatsApp broadcast message. Friendly, exciting tone. Include a call to action to visit the shop.\"\n\nIn under a minute, she has six drafts. She spends ten minutes choosing the best ones, adding her shop's name and fixing a detail. By 9:30, her posts are scheduled and she is serving customers.\n\nGrace did not let AI run her business. She used it to do in ten minutes what used to take an hour, then applied her own judgment. That is the pattern this guide teaches.\n\n### Try it now (10 minutes)\n\n1. Open any free AI chat assistant in your browser or on your phone and create an account.\n2. Type: \"Explain in simple words how a small \\[your type of business\\] could use AI to save time. Give me 10 ideas.\"\n3. Read the list. Mark the three ideas that would save you the most time.\n4. Keep that list. You will use it in Chapter 2.\n\n### Chapter summary\n\n- AI learns patterns from huge amounts of information and uses them to produce text, images and answers.\n- Chat assistants are the most useful starting point for most small businesses.\n- AI is fast and capable, but it does not know your business unless you tell it, and it can be wrong.\n- Treat AI as an assistant whose work you always review. You remain the decision maker."
+    },
+    {
+      "id": "chapter-2-finding-your-first-ai-wins",
+      "title": "Chapter 2: Finding Your First AI Wins",
+      "free": false,
+      "minutes": 4,
+      "teaser": "Your first AI wins come from small, repetitive tasks you already do every week. Do not start with a big, complicated project."
+    },
+    {
+      "id": "chapter-3-ai-for-marketing-and-sales",
+      "title": "Chapter 3: AI for Marketing and Sales",
+      "free": false,
+      "minutes": 4,
+      "teaser": "Marketing is where most small businesses see the fastest return from AI. It turns hours of writing into minutes, helps you stay consistent, and gives you fresh ideas when you are stuck."
+    },
+    {
+      "id": "chapter-4-ai-for-customer-service-and-daily-operations",
+      "title": "Chapter 4: AI for Customer Service and Daily Operations",
+      "free": false,
+      "minutes": 4,
+      "teaser": "AI helps you answer customers faster and run the business with less paperwork. Customer service and operations are full of repeated questions, routine documents and small admin tasks, exactly the kind of work AI handles well."
+    },
+    {
+      "id": "chapter-5-using-ai-safely-and-responsibly",
+      "title": "Chapter 5: Using AI Safely and Responsibly",
+      "free": false,
+      "minutes": 4,
+      "teaser": "Using AI responsibly protects your customers, your reputation and your business. The rules are simple: protect private information, check everything important, be honest about AI use, and respect other people's work."
+    },
+    {
+      "id": "chapter-6-your-30-day-ai-action-plan",
+      "title": "Chapter 6: Your 30-Day AI Action Plan",
+      "free": false,
+      "minutes": 3,
+      "teaser": "In 30 days, you can move from curious beginner to confident AI user, with real time savings to show for it. The plan below needs about 30 minutes a day."
+    },
+    {
+      "id": "extras",
+      "title": "Extras",
+      "free": false,
+      "minutes": 2,
+      "teaser": "Replace the words in [brackets] with your own details. For best results, paste your business profile first."
+    },
+    {
+      "id": "about-the-author",
+      "title": "About the Author",
+      "free": false,
+      "minutes": 1,
+      "teaser": "Samuel Gideon Omurok is the founder of Novaris AI Training and Publishing. Born in Serere District in eastern Uganda in 1982, Samuel attended St. Aloysius Demonstration Primary School in Ngora, then Teso College Aloet for his ordinary-level secondary education and Teso Integrated Secondary School for advanced level."
+    }
+  ]
+}

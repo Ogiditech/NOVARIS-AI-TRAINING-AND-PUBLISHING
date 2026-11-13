@@ -18,7 +18,20 @@ const manuscript = fs.existsSync(config.source) ? config.source : meta.testBuild
 const secrets = manuscript ? lockedSentences(config, fs.readFileSync(manuscript, 'utf8')) : [];
 const firstFree = meta.toc.find((s) => s.free);
 const firstLocked = meta.toc.find((s) => !s.free);
-const tableSection = meta.testBuild ? meta.toc.find((s) => /chapter\s*1/i.test(s.title)) : null;
+const fullBook = JSON.parse(fs.readFileSync(new URL(`../src/data/ebooks/${SLUG}.json`, import.meta.url), 'utf8'));
+const tableSection = fullBook.sections.find((s) => s.free && /^\s*\|.*\|\s*$/m.test(s.content)) || null;
+
+/** Counts what a section's Markdown should produce on screen (outside fenced code). */
+function expectedMarkdown(md) {
+  const fences = (md.match(/^\s*```/gm) || []).length / 2;
+  const prose = md.replace(/```[\s\S]*?```/g, '');
+  const lines = prose.split(/\r?\n/);
+  const tables = lines.filter((l) => /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(l)).length;
+  const tableLines = lines.filter((l) => /^\s*\|.*\|\s*$/.test(l)).length;
+  const tasks = lines.filter((l) => /^\s*[-*+]\s+\[[ xX]\]\s/.test(l)).length;
+  const items = lines.filter((l) => /^\s*(?:[-*+]|\d+[.)])\s+\S/.test(l)).length - tasks;
+  return { tables, rows: tableLines - tables * 2, tasks, checked: lines.filter((l) => /^\s*[-*+]\s+\[[xX]\]\s/.test(l)).length, code: fences, lists: items };
+}
 
 const results = [];
 const check = (area, name, ok, detail = '') => results.push({ area, name, ok: !!ok, detail });
@@ -43,6 +56,8 @@ async function newPage(width = 1280, height = 900, { theme = 'dark', blockStorag
 }
 const go = async (page, path) => { await page.goto(BASE + path, { waitUntil: 'networkidle0' }); await wait(700); };
 const text = (page) => page.evaluate(() => document.body.innerText);
+// The site uses smooth scrolling: bring a button into view instantly before clicking so the click cannot miss.
+const clickNav = async (page, which) => { await page.$eval(`[data-nav="${which}"]`, (e) => e.scrollIntoView({ block: 'center', behavior: 'instant' })); await page.click(`[data-nav="${which}"]`); await wait(500); };
 const overflow = (page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
 
 try {
@@ -72,32 +87,38 @@ try {
   const sidebar = await page.$$eval('aside nav li', (l) => l.length);
   check('Reader', 'table of contents sidebar on desktop', sidebar === meta.toc.length, `${sidebar} entries`);
 
-  if (tableSection) {
-    await go(page, `/ebooks/${SLUG}/read?s=${tableSection.id}`);
-    const md = await page.evaluate(() => ({
-      rows: document.querySelectorAll('article .book-table table tbody tr').length,
-      th: document.querySelectorAll('article table th').length,
-      boxes: document.querySelectorAll('article .contains-task-list input[type=checkbox]').length,
+  // Every free section: what the Markdown contains must be what the reader renders.
+  const totals = { tables: 0, rows: 0, tasks: 0, code: 0, lists: 0 };
+  const mismatches = [];
+  for (const s of fullBook.sections.filter((x) => x.free)) {
+    const expected = expectedMarkdown(s.content);
+    for (const k of Object.keys(totals)) totals[k] += expected[k];
+    await go(page, `/ebooks/${SLUG}/read?s=${s.id}`);
+    const got = await page.evaluate(() => ({
+      tables: document.querySelectorAll('article .book-table > table').length,
+      rows: document.querySelectorAll('article table tbody tr').length,
+      tasks: document.querySelectorAll('article .contains-task-list input[type=checkbox]').length,
       checked: document.querySelectorAll('article .contains-task-list input[type=checkbox]:checked').length,
-      code: document.querySelector('article pre code')?.innerText || '',
-      inline: document.querySelectorAll('article :not(pre) > code').length,
-      strong: document.querySelectorAll('article strong').length,
+      code: document.querySelectorAll('article pre > code').length,
+      lists: document.querySelectorAll('article ul:not(.contains-task-list) > li, article ol > li').length,
+      rawMarkdown: /(^|\n)\s*\|.*\|\s*(\n|$)|```|\*\*\S/.test(document.querySelector('article').innerText),
     }));
-    check('Markdown', 'tables render (header + rows, scroll container)', md.rows === 3 && md.th === 3, JSON.stringify(md));
-    check('Markdown', 'checklists render as checkboxes', md.boxes === 3 && md.checked === 1);
-    check('Markdown', 'code blocks and inline code render', md.code.includes('helpful assistant') && md.inline >= 1 && md.strong >= 1);
-    await page.screenshot({ path: `${OUT}book-tables-dark.png`, fullPage: true });
+    for (const k of Object.keys(expected)) if (got[k] !== expected[k]) mismatches.push(`${s.id} ${k}: expected ${expected[k]}, got ${got[k]}`);
+    if (got.rawMarkdown) mismatches.push(`${s.id}: raw Markdown symbols visible`);
+    if (s.id === tableSection?.id) await page.screenshot({ path: `${OUT}book-tables-dark.png`, fullPage: true });
   }
+  const sum = `${totals.tables} tables / ${totals.rows} rows · ${totals.tasks} checklist items · ${totals.code} code blocks · ${totals.lists} list items`;
+  check('Markdown', 'sample sections render every table, list, checklist and code block', mismatches.length === 0 && totals.tables > 0, mismatches[0] || sum);
 
   // ---------- Navigation + progress
   await go(page, `/ebooks/${SLUG}/read?s=${meta.toc[0].id}`);
   const p0 = Number(await page.$eval('[role=progressbar]', (e) => e.getAttribute('aria-valuenow')));
-  await page.click('[data-nav="next"]'); await wait(500);
+  await clickNav(page, 'next');
   const afterNext = { id: await page.$eval('article', (a) => a.dataset.section), url: page.url() };
   const p1 = Number(await page.$eval('[role=progressbar]', (e) => e.getAttribute('aria-valuenow')));
-  await page.click('[data-nav="prev"]'); await wait(500);
+  await clickNav(page, 'prev');
   const afterPrev = await page.$eval('article', (a) => a.dataset.section);
-  check('Reader', 'next / previous navigation (URL updates)', afterNext.id === meta.toc[1].id && afterNext.url.includes(`s=${meta.toc[1].id}`) && afterPrev === meta.toc[0].id);
+  check('Reader', 'next / previous navigation (URL updates)', afterNext.id === meta.toc[1].id && afterNext.url.includes(`s=${meta.toc[1].id}`) && afterPrev === meta.toc[0].id, `${afterNext.id} · ${afterNext.url.split('?')[1]} · back to ${afterPrev}`);
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)); await wait(400);
   const pScroll = Number(await page.$eval('[role=progressbar]', (e) => e.getAttribute('aria-valuenow')));
   check('Reader', 'progress bar moves with chapters and scrolling', p1 > p0 && pScroll > p0, `${p0}% → next ${p1}% · scrolled ${pScroll}%`);
@@ -145,7 +166,7 @@ try {
   // ---------- localStorage blocked
   const blocked = await newPage(1280, 900, { blockStorage: true });
   await go(blocked, `/ebooks/${SLUG}/read`);
-  await blocked.click('[data-nav="next"]').catch(() => {}); await wait(400);
+  await clickNav(blocked, 'next').catch(() => {});
   check('Reader', 'works when localStorage is blocked', (await blocked.$eval('article', (a) => a.dataset.section).catch(() => null)) === meta.toc[1].id);
 
   // ---------- Light mode

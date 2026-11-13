@@ -94,7 +94,7 @@ function Reader({ meta }) {
       if (saved.s !== ids[0] || saved.y > 0.02) toast(t('originals.resumed'), 'info');
       requestAnimationFrame(() => requestAnimationFrame(() => {
         const max = document.documentElement.scrollHeight - window.innerHeight;
-        window.scrollTo({ top: Math.max(0, (saved.y || 0) * max) });
+        window.scrollTo({ top: Math.max(0, (saved.y || 0) * max), behavior: 'instant' });
       }));
     }
   }, [book, ids, requested, setParams, storeKey, t, toast]);
@@ -133,7 +133,7 @@ function Reader({ meta }) {
     setDrawer(false);
     setParams({ s: id });
     writeStore(storeKey, { s: id, y: 0 });
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: 'instant' }); // the site scrolls smoothly; a new chapter should start at the top at once
   }, [setParams, storeKey]);
 
   if (error) return <ErrorState error={error} onRetry={() => setAttempt((n) => n + 1)} />;
