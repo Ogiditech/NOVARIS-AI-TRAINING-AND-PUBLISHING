@@ -1,0 +1,77 @@
+{
+  "slug": "ai-for-job-seekers",
+  "title": "AI for Job Seekers",
+  "subtitle": "A Novaris AI Training and Publishing Guide",
+  "author": "Samuel Gideon Omurok",
+  "publisher": "Novaris AI Training and Publishing",
+  "edition": "First edition, November 2026",
+  "price": 7.99,
+  "currency": "USD",
+  "status": "coming-soon",
+  "category": "AI Basics",
+  "cover": [
+    "#047857",
+    "#0e7490"
+  ],
+  "description": "This book shows you how to use AI tools to find work faster, apply better and walk into interviews prepared. You do not need any technical skills.",
+  "minutes": 18,
+  "freeCount": 2,
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "free": true,
+      "minutes": 2,
+      "content": "This book shows you how to use AI tools to find work faster, apply better and walk into interviews prepared. You do not need any technical skills. If you can type a message, you can follow every step.\n\nLooking for a job is hard work. You write the same CV again and again, read hundreds of adverts, and often hear nothing back. AI cannot get you a job on its own. But it can take away much of the slow, repetitive work, so you can spend your energy where it counts: on the right roles and the right conversations.\n\n### Who this book is for\n\nThis guide is for anyone looking for work, wherever they are. That includes:\n\n- Fresh graduates in Kampala, Lagos or Manila applying for their first job\n- Experienced workers in Dubai, London or Nairobi who want to move up or change careers\n- People returning to work after a break for family, study or illness\n- Anyone who has sent many applications and wants to understand why replies are not coming\n\nThe examples in this book mix local and international settings. You will meet a nursing graduate in Mbale, a sales assistant in Dubai, a teacher in Nairobi and an accountant moving to Canada. The tools and steps work the same way in every country.\n\n### What you will learn\n\nBy the end of this book you will be able to:\n\n1. Understand how employers now use software and AI to screen applications\n2. Use AI to write and tailor a clear, honest CV for each job\n3. Draft cover letters, follow-up emails and a stronger LinkedIn profile\n4. Find openings and research employers more quickly\n5. Practise interviews with an AI coach and prepare for salary questions\n6. Spot job scams and use AI responsibly throughout your search\n\n### How to use this book\n\nRead each chapter with an AI tool open beside you, such as ChatGPT, Claude or Gemini. Each chapter includes ready-to-use prompts. Copy them, replace the parts in square brackets with your own details, and try them straight away.\n\nOne rule runs through the whole book: **AI helps you present the truth well. It never invents things for you.** Every word you send to an employer must be accurate and must sound like you. Keep that rule, and AI becomes one of the most useful tools in your job search."
+    },
+    {
+      "id": "chapter-1-how-ai-is-changing-job-hunting",
+      "title": "Chapter 1: How AI Is Changing Job Hunting",
+      "free": true,
+      "minutes": 2,
+      "content": "AI now sits on both sides of the hiring table. Employers use software to sort applications, and job seekers use AI to write and prepare them. Understanding both sides is the first step to getting noticed.\n\n### What happens after you click \"Apply\"\n\nMany medium and large employers no longer read every application by hand. They use an **Applicant Tracking System (ATS)**. This is software that collects, stores and sorts applications. A typical online application travels like this:\n\n1. You upload your CV and fill in the online form.\n2. The ATS reads your CV and pulls out your details: job titles, dates, skills, education.\n3. The system compares your details with the job requirements and may rank or filter candidates.\n4. A recruiter reviews the top-ranked applications, often for less than a minute each.\n5. Shortlisted candidates are invited to a screening call or interview.\n\nSome employers now add AI tools to this process. These can rank CVs, run short chatbot screening questions, or review recorded video answers. The exact tools differ by company and country, and many smaller employers still read every CV themselves.\n\n### What this means for you\n\nTwo lessons follow from this.\n\n**First, your CV must be easy for software to read.** Fancy designs, photos of text, tables and graphics can confuse an ATS. A clean, simple layout with clear headings is safer.\n\n**Second, your CV must match the job's language.** If the advert asks for \"customer service\" and your CV only says \"client care\", a system may miss the match. You should use the employer's own words wherever they truthfully describe your experience.\n\n### How AI helps job seekers\n\nAI tools can help you at every stage of the search:\n\n| Stage | What AI can do for you |\n| --- | --- |\n| Searching | Suggest job titles you may not have considered, and explain unfamiliar roles |\n| CV writing | Turn rough notes into clear bullet points and tailor them to each advert |\n| Applications | Draft cover letters, emails and LinkedIn summaries |\n| Research | Summarise what a company does and what it values |\n| Interviews | Act as a practice interviewer and give feedback on your answers |\n| Follow-up | Draft polite thank-you and follow-up messages |\n\n### Example: Grace in Mbale\n\nGrace has just finished a nursing diploma in Mbale, Uganda. She has applied to six hospitals with the same general CV and heard nothing back. With an AI tool, she compares her CV against each advert. She notices that the private hospitals ask for \"patient records management\" and \"infection prevention\", which she did during her placements but never wrote down. She adds these truthfully, and starts getting calls.\n\nNothing in Grace's experience changed. Only the way she described it did.\n\n### What AI cannot do\n\nAI has real limits, and you need to know them:\n\n- It does not know your experience unless you tell it.\n- It can make up facts, dates or company details that sound right but are wrong.\n- It cannot guarantee that a job advert is real or that an employer is honest.\n- It cannot replace your own judgement, your network or your effort.\n\nTreat AI like a smart assistant who writes quickly but needs checking. You stay in charge.\n\n### Try it now\n\nCopy this prompt into your AI tool:\n\n> I am looking for work as a \\[job title\\] in \\[city or country\\]. Explain in simple words how employers in this field usually screen applications, and list five things I should check on my CV before applying."
+    },
+    {
+      "id": "chapter-2-writing-a-strong-cv-with-ai",
+      "title": "Chapter 2: Writing a Strong CV with AI",
+      "free": false,
+      "minutes": 3,
+      "teaser": "A good CV is clear, honest and matched to the job. AI can help with all three, as long as you give it real information and check everything it writes."
+    },
+    {
+      "id": "chapter-3-cover-letters-emails-and-linkedin-with-ai",
+      "title": "Chapter 3: Cover Letters, Emails and LinkedIn with AI",
+      "free": false,
+      "minutes": 2,
+      "teaser": "Your CV shows what you have done. Your cover letter, emails and LinkedIn profile show who you are and why you want this job."
+    },
+    {
+      "id": "chapter-4-finding-jobs-and-researching-employers-with-ai",
+      "title": "Chapter 4: Finding Jobs and Researching Employers with AI",
+      "free": false,
+      "minutes": 2,
+      "teaser": "AI will not search every job board for you, but it can help you search smarter. It can widen your list of job titles, plan where to look, and help you understand an employer before you apply."
+    },
+    {
+      "id": "chapter-5-interview-preparation-with-ai",
+      "title": "Chapter 5: Interview Preparation with AI",
+      "free": false,
+      "minutes": 3,
+      "teaser": "An interview invitation means your application worked. Now preparation decides the result, and AI makes an excellent practice partner."
+    },
+    {
+      "id": "chapter-6-using-ai-responsibly-avoiding-scams-and-your-14-day-plan",
+      "title": "Chapter 6: Using AI Responsibly, Avoiding Scams and Your 14-Day Plan",
+      "free": false,
+      "minutes": 3,
+      "teaser": "AI makes job hunting faster, but it also makes fake jobs easier to create. This chapter shows you how to protect yourself, use AI fairly, and turn everything in this book into action."
+    },
+    {
+      "id": "about-the-author",
+      "title": "About the Author",
+      "free": false,
+      "minutes": 1,
+      "teaser": "Samuel Gideon Omurok is the founder of Novaris AI Training and Publishing. Born in Serere District in eastern Uganda in 1982, Samuel attended St. Aloysius Demonstration Primary School in Ngora, then Teso College Aloet for his ordinary-level secondary education and Teso Integrated Secondary School for advanced level."
+    }
+  ]
+}

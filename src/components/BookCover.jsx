@@ -22,10 +22,10 @@ export default function BookCover({ book, className = '' }) {
         <span className="text-[10px] font-semibold uppercase tracking-[.25em] opacity-80">{t('common.publisher')}</span>
         <div>
           <h3 className="font-display text-lg font-bold leading-tight drop-shadow sm:text-xl">{book.title}</h3>
-          <p className="mt-1 text-[11px] opacity-85">{book.subtitle}</p>
+          <p className="mt-1 line-clamp-2 text-[11px] opacity-85">{book.subtitle}</p>
         </div>
         <div className="flex items-end justify-between">
-          <span className="text-[11px] font-medium opacity-90">{book.author_name}</span>
+          <span className="min-w-0 truncate pr-2 text-[11px] font-medium opacity-90">{book.author_name}</span>
           <LogoMark size={22} />
         </div>
       </div>

@@ -54,6 +54,21 @@ export const BOOKS = [
     cover: ['#1d4ed8', '#0d9488'],
     free: [/^copyright\b/i, /^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
   },
+  {
+    slug: 'ai-for-job-seekers',
+    source: 'content/ebooks/ai-for-job-seekers.md',
+    title: 'AI for Job Seekers',
+    subtitle: 'A Novaris AI Training and Publishing Guide',
+    author: 'Samuel Gideon Omurok',
+    publisher: 'Novaris AI Training and Publishing',
+    edition: 'First edition, November 2026',
+    price: 7.99,
+    currency: 'USD',
+    status: 'coming-soon',
+    category: 'AI Basics',
+    cover: ['#047857', '#0e7490'],
+    free: [/^introduction\b/i, /^chapter\s*(1|one)\b(?!\d)/i],
+  },
 ];
 
 /** Headings may contain HTML entities from editors (e.g. "About the Author&#32;"). */
