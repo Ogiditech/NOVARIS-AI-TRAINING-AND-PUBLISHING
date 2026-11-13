@@ -14,7 +14,7 @@
     "#db2777"
   ],
   "description": "This book teaches you how to ask AI tools for exactly what you need, so you get useful answers the first time. That skill is called prompt engineering.",
-  "minutes": 10,
+  "minutes": 11,
   "freeCount": 2,
   "sections": [
     {
@@ -65,6 +65,13 @@
       "free": false,
       "minutes": 2,
       "teaser": "The fastest way to master prompting is to save the prompts that work and practise a little every day. This chapter shows you how."
+    },
+    {
+      "id": "about-the-author",
+      "title": "About the Author",
+      "free": false,
+      "minutes": 1,
+      "teaser": "Samuel Gideon Omurok is the founder of Novaris AI Training and Publishing. Born in Serere District in eastern Uganda in 1982, Samuel attended St. Aloysius Demonstration Primary School in Ngora, then Teso College Aloet for his ordinary-level secondary education and Teso Integrated Secondary School for advanced level."
     }
   ]
 }
