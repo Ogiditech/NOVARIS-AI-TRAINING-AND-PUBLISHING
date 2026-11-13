@@ -149,12 +149,15 @@ try {
     const answerKey = async (lessonId) => (await sql`SELECT correct_index FROM quiz_questions WHERE lesson_id = ${lessonId} ORDER BY id`).map((r) => r.correct_index);
     // wrong answers first on lesson 1
     const key1 = await answerKey(lessons[0].id);
+    // The quiz loads from the database; answer only once every question is on screen.
+    await waitFor(page, (n) => document.querySelectorAll('[role=radiogroup]').length >= n, key1.length, 15000);
     await page.evaluate((key) => { const groups = document.querySelectorAll('[role=radiogroup]'); groups.forEach((g, i) => g.querySelectorAll('[role=radio]')[(key[i] + 1) % 4].click()); }, key1);
     await clickText(page, 'button', 'Check answer');
-    await waitFor(page, () => document.body.innerText.includes('Score:'));
+    await waitFor(page, (n) => document.body.innerText.includes('Score:') && (document.body.innerText.match(/Not quite\./g) || []).length >= n, key1.length, 15000);
+    await wait(400);
     tx = await text(page);
     const greens = await page.evaluate(() => [...document.querySelectorAll('[role=radio]')].filter((b) => b.className.includes('bg-emerald-500/15')).length);
-    check('Quiz', 'server marks wrong answers without revealing the right one', tx.includes('Score: 0%') && (tx.match(/Not quite\./g) || []).length === 3 && (tx.match(/Check this part of the lesson again/g) || []).length === 3 && greens === 0, `highlighted right answers: ${greens}`);
+    check('Quiz', 'server marks wrong answers without revealing the right one', tx.includes('Score: 0%') && (tx.match(/Not quite\./g) || []).length === 3 && (tx.match(/Check this part of the lesson again/g) || []).length === 3 && greens === 0, `${(tx.match(/Score: \d+%/) || ['no score'])[0]} · not-quite ${(tx.match(/Not quite\./g) || []).length} · hints ${(tx.match(/Check this part of the lesson again/g) || []).length} · highlighted ${greens}`);
     await clickText(page, 'button', 'Retake quiz'); await wait(300);
     await page.evaluate((key) => { document.querySelectorAll('[role=radiogroup]').forEach((g, i) => g.querySelectorAll('[role=radio]')[key[i]].click()); }, key1);
     await clickText(page, 'button', 'Check answer');
