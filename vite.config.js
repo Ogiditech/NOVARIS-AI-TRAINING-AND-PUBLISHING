@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173,
+    // Own port so Novaris can run next to other Vite projects (they default to 5173).
+    port: 5190,
     open: false,
     // /api is served by server/dev-api.mjs (same handlers Vercel runs in production).
     proxy: { '/api': { target: 'http://localhost:3001', changeOrigin: false } },

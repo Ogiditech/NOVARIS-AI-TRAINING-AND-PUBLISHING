@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
 import { BOOKS, lockedSentences } from '../scripts/build-ebooks.js';
 
-const BASE = process.env.BASE || 'http://localhost:5173';
+const BASE = process.env.BASE || 'http://localhost:5190';
 const OUT = fileURLToPath(new URL('./output/', import.meta.url));
 fs.mkdirSync(OUT, { recursive: true });
 // BOOK=<slug> tests another book (default: the first one in scripts/build-ebooks.js).

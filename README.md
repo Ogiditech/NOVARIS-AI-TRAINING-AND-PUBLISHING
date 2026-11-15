@@ -77,7 +77,7 @@ npm run db:setup     # creates the tables and loads sample data (safe to re-run)
 npm run dev
 ```
 
-This starts the Vite frontend and a local API server together. The local API server loads the same `/api` files and `vercel.json` rewrites that Vercel uses, so no Vercel login is needed.
+This starts the Vite frontend and a local API server together. Open **http://localhost:5190** (Novaris uses its own port so it can run next to other Vite projects on 5173). The local API server loads the same `/api` files and `vercel.json` rewrites that Vercel uses, so no Vercel login is needed.
 
 ## Scripts
 

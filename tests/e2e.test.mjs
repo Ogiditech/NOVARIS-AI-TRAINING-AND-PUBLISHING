@@ -8,7 +8,7 @@ import puppeteer from 'puppeteer-core';
 import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 
-const BASE = 'http://localhost:5173';
+const BASE = process.env.BASE || 'http://localhost:5190';
 const OUT = fileURLToPath(new URL('./output/', import.meta.url));
 fs.mkdirSync(OUT, { recursive: true });
 const EMAIL = 'test@novaris.com';

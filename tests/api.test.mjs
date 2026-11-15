@@ -121,8 +121,9 @@ try {
   const b1 = await call('POST', '/api/bookings', { id: open.id });
   const b2 = await call('POST', '/api/bookings', { id: open.id });
   check('book seat (no double booking)', b1.json.seatsLeft === open.seats_left - 1 && b2.json.alreadyBooked && b2.json.seatsLeft === open.seats_left - 1);
-  const bf = await call('POST', '/api/bookings', { id: full.id });
-  check('full class cannot be booked', bf.status === 409 && bf.json.code === 'class_full');
+  // The full demo class can drop off the schedule once its date passes — `npm run db:refresh-classes` brings it back.
+  const bf = full ? await call('POST', '/api/bookings', { id: full.id }) : null;
+  check('full class cannot be booked', bf?.status === 409 && bf.json.code === 'class_full', full ? '' : 'no full class on the schedule — run npm run db:refresh-classes');
   const c1 = await call('DELETE', `/api/bookings?id=${open.id}`);
   check('cancel booking', c1.json.booked === false && c1.json.seatsLeft === open.seats_left);
   // concurrency: 6 parallel bookings for the same seat by the same user → exactly one row
