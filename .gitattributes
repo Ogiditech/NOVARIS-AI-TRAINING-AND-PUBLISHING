@@ -1,0 +1,5 @@
+# Keep line endings consistent (LF) on every OS; silences "LF will be replaced by CRLF" warnings on Windows.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
